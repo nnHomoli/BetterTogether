@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "id": "looking",
+  "id": "betterwithsitting",
   "version": "${version}",
 
-  "name": "Looking",
-  "description": "Looking around bta modbase",
+  "name": "Better With Sitting",
+  "description": "Allows players to sit",
   "authors": [
     "nnHomoli"
   ],
@@ -19,20 +19,20 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-			"nnhomoli.looking.Main"
+			"nnhomoli.betterwithsitting.Main"
     ],
 		"beforeGameStart": [
-			"nnhomoli.looking.Main"
+			"nnhomoli.betterwithsitting.Main"
 		],
 		"afterGameStart": [
-			"nnhomoli.looking.Main"
+			"nnhomoli.betterwithsitting.Main"
 		],
 		"recipesReady": [
-			"nnhomoli.looking.Main"
+			"nnhomoli.betterwithsitting.Main"
 		]
 	},
   "mixins": [
-      "looking.mixins.json"
+      "betterwithsitting.mixins.json"
   ],
 
   "depends": {

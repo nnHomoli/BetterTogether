@@ -1,4 +1,4 @@
-package nnhomoli.looking.entity;
+package nnhomoli.betterwithsitting.entity;
 
 import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.entity.Entity;
