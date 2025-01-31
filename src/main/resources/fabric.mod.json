@@ -1,16 +1,15 @@
 {
   "schemaVersion": 1,
-  "id": "betterwithsitting",
+  "id": "bettertogether",
   "version": "${version}",
 
-  "name": "Better With Sitting",
-  "description": "Allows players to sit",
+  "name": "Better Together",
+  "description": "Better Than Adventure mod that adds server-sided sitting on players",
   "authors": [
     "nnHomoli"
   ],
   "contact": {
-    "homepage": "",
-    "sources": ""
+    "sources": "https://github.com/nnHomoli/BetterTogether"
   },
 
 	"icon": "icon.png",
@@ -19,20 +18,11 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-			"nnhomoli.betterwithsitting.Main"
-    ],
-		"beforeGameStart": [
-			"nnhomoli.betterwithsitting.Main"
-		],
-		"afterGameStart": [
-			"nnhomoli.betterwithsitting.Main"
-		],
-		"recipesReady": [
-			"nnhomoli.betterwithsitting.Main"
-		]
+			"nnhomoli.bettertogether.Main"
+    ]
 	},
   "mixins": [
-      "betterwithsitting.mixins.json"
+      "bettertogether.mixins.json"
   ],
 
   "depends": {
