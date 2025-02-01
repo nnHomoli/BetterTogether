@@ -52,7 +52,7 @@ public abstract class playerMixin {
 //			pretty sure simplified auth had also issue alike
  			if(Main.vehicleEject) entity.startRiding(null);
 			ci.cancel();
-		} else if(entity.getPassenger() != null && entity == entity.getPassenger().vehicle && entity.getPassenger().vehicle instanceof PlayerServer) ci.cancel();
+		} else if(entity.getPassenger() instanceof PlayerServer && entity instanceof PlayerServer) ci.cancel();
 	}
 
 	@Inject(method="causeFallDamage",at=@At("HEAD"), cancellable = true)
