@@ -14,7 +14,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Environment(EnvType.SERVER)
 @Mixin(value = Entity.class,remap=false)
 public abstract class entityMixin {
 	@Shadow @Nullable public Entity passenger;

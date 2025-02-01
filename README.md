@@ -4,8 +4,6 @@
 
 This mod adds server-sided sitting on players
 
-If installed client-side the game won't load, so servers only
-
 ## Gallery
 
 <img src="gallery/vehicle-perspective.png" width="512" alt=""> 

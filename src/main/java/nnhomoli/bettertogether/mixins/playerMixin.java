@@ -15,7 +15,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static nnhomoli.bettertogether.misc.checkTower.*;
 
-@Environment(EnvType.SERVER)
 @Mixin(value = Player.class,remap = false)
 public abstract class playerMixin {
 
