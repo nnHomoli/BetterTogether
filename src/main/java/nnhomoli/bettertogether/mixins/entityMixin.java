@@ -1,7 +1,5 @@
 package nnhomoli.bettertogether.mixins;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.world.IVehicle;

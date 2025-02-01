@@ -1,9 +1,8 @@
 package nnhomoli.bettertogether.mixins;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.Player;
+import net.minecraft.core.net.packet.PacketSetRiding;
 import net.minecraft.core.world.IVehicle;
 import net.minecraft.server.entity.player.PlayerServer;
 import nnhomoli.bettertogether.Main;
@@ -50,7 +49,10 @@ public abstract class playerMixin {
 //			removing vehicle seems to be isolated, no way to do this without making client side part too
 //			unless if there's some workaround that pushes player out of vehicle, which I didn't seem to find
 //			pretty sure simplified auth had also issue alike
- 			if(Main.vehicleEject) player.ejectRider();
+ 			if(Main.vehicleEject) {
+				player.ejectRider();
+				((PlayerServer)entity).playerNetServerHandler.sendPacket(new PacketSetRiding(entity, null));
+			}
 			ci.cancel();
 		} else if(entity.getPassenger() instanceof PlayerServer && entity instanceof PlayerServer) ci.cancel();
 	}
