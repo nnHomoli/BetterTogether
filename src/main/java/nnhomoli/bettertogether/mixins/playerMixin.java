@@ -50,7 +50,7 @@ public abstract class playerMixin {
 //			removing vehicle seems to be isolated, no way to do this without making client side part too
 //			unless if there's some workaround that pushes player out of vehicle, which I didn't seem to find
 //			pretty sure simplified auth had also issue alike
- 			if(Main.vehicleEject) entity.startRiding(null);
+ 			if(Main.vehicleEject) player.ejectRider();
 			ci.cancel();
 		} else if(entity.getPassenger() instanceof PlayerServer && entity instanceof PlayerServer) ci.cancel();
 	}
