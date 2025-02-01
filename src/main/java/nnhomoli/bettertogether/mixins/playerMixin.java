@@ -1,5 +1,7 @@
 package nnhomoli.bettertogether.mixins;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.world.IVehicle;
@@ -13,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static nnhomoli.bettertogether.misc.checkTower.*;
 
+@Environment(EnvType.SERVER)
 @Mixin(value = Player.class,remap = false)
 public abstract class playerMixin {
 
@@ -26,10 +29,8 @@ public abstract class playerMixin {
 				if (entity.getPassenger() == null && player.getPassenger() == null) {
 					if(player.vehicle != null) player.heightOffset = 0;
 					player.startRiding(entity);
-					player.heightOffset += 0.5F;
 				}  else if(Main.towering && !includedInTower(entity,player)) {
 					player.startRiding(getTowerTop(entity));
-					player.heightOffset += 0.5F;
 				}
 			}
 		}

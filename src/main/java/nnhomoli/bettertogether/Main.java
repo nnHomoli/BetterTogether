@@ -27,7 +27,6 @@ public class Main implements ModInitializer {
 		towering = cfg.getBoolean("player-towering");
 		vehicleEject = cfg.getBoolean("experimental-vehicle-eject");
 
-
 		LOGGER.info("Better Together initialized.");
 	}
 }
