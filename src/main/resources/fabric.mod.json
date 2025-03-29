@@ -18,7 +18,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-			"nnhomoli.bettertogether.Main"
+			"nnhomoli.bettertogether.BetterTogether"
     ]
 	},
   "mixins": [

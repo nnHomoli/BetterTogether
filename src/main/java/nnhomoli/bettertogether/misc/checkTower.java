@@ -4,9 +4,9 @@ import net.minecraft.core.entity.Entity;
 import net.minecraft.core.world.IVehicle;
 
 public class checkTower {
-	public static IVehicle checkTowerRoot(IVehicle vehicle) {
+	public static IVehicle getTowerRoot(IVehicle vehicle) {
 		if(vehicle instanceof Entity && ((Entity) vehicle).vehicle != null) {
-			return checkTowerRoot(((Entity) vehicle).vehicle);
+			return getTowerRoot(((Entity) vehicle).vehicle);
 		} else {
 			return vehicle;
 		}
@@ -16,6 +16,6 @@ public class checkTower {
 		return getTowerTop(entity.passenger);
 	}
 	public static boolean includedInTower(IVehicle vehicle, Entity entity) {
-		return checkTowerRoot(vehicle) == checkTowerRoot(entity);
+		return getTowerRoot(vehicle) == getTowerRoot(entity);
 	}
 }

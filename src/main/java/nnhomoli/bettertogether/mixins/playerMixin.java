@@ -14,8 +14,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static nnhomoli.bettertogether.misc.checkTower.*;
 
-import static nnhomoli.bettertogether.Main.getTowering;
-import static nnhomoli.bettertogether.Main.getVehicleEject;
+import static nnhomoli.bettertogether.BetterTogether.getTowering;
+import static nnhomoli.bettertogether.BetterTogether.getVehicleEject;
 
 @Mixin(value = Player.class,remap = false)
 public abstract class playerMixin {
@@ -25,7 +25,7 @@ public abstract class playerMixin {
 		Player player = (Player) (Object) this;
 		if(entity instanceof Player) {
 			IVehicle last = entity.vehicle;
-			if(getTowering()) last = checkTowerRoot(entity);
+			if(getTowering()) last = getTowerRoot(entity);
 			if(last == null || getTowering() && last instanceof PlayerServer) {
 				if (entity.getPassenger() == null && player.getPassenger() == null) {
 					if(player.vehicle != null) player.heightOffset = 0;
@@ -54,10 +54,10 @@ public abstract class playerMixin {
 //				((PlayerServer)entity).playerNetServerHandler.sendPacket(new PacketSetRiding(entity, null));
 
 				((PlayerServer)entity).playerNetServerHandler.sendPacket(new PacketRemoveEntity(player.id));
-				((PlayerServer)entity).playerNetServerHandler.sendPacket(new PacketAddPlayer((player)));
+				((PlayerServer)entity).playerNetServerHandler.sendPacket(new PacketAddPlayer(player));
 			}
 			ci.cancel();
-		} else if(entity.getPassenger() instanceof PlayerServer && entity instanceof PlayerServer) ci.cancel();
+		} else if(entity instanceof PlayerServer && includedInTower(player,entity)) ci.cancel();
 	}
 
 	@Inject(method="causeFallDamage",at=@At("HEAD"), cancellable = true)
