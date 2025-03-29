@@ -8,24 +8,28 @@ import turniplabs.halplibe.util.ConfigHandler;
 import java.util.Properties;
 
 public class Main implements ModInitializer {
-	public static final String MOD_ID = "bettertogether";
-	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-	public static boolean towering;
-	public static boolean vehicleEject;
+	private final String MOD_ID = "BetterTogether";
+	private final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-	public static final ConfigHandler cfg;
-	static {
+	private static boolean towering;
+	private static boolean vehicleEject;
+
+	public void setupConfig() {
 		Properties props = new Properties();
-		props.setProperty("experimental-vehicle-eject", "false");
+		props.setProperty("vehicle-eject", "true");
 		props.setProperty("player-towering", "false");
-		cfg = new ConfigHandler(MOD_ID,props);
+		ConfigHandler cfg = new ConfigHandler(MOD_ID, props);
+
+		towering = cfg.getBoolean("player-towering");
+		vehicleEject = cfg.getBoolean("vehicle-eject");
 	}
+
+	public static boolean getTowering() {return towering;}
+	public static boolean getVehicleEject() {return vehicleEject;}
 
 	@Override
 	public void onInitialize() {
-		towering = cfg.getBoolean("player-towering");
-		vehicleEject = cfg.getBoolean("experimental-vehicle-eject");
-
+		setupConfig();
 		LOGGER.info("Better Together initialized.");
 	}
 }
