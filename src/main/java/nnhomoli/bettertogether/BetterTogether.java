@@ -7,7 +7,7 @@ import turniplabs.halplibe.util.ConfigHandler;
 
 import java.util.Properties;
 
-public class BetterTogether implements ModInitializer {
+public final class BetterTogether implements ModInitializer {
 	private final String MOD_ID = "BetterTogether";
 	private final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 

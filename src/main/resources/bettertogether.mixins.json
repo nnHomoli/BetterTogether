@@ -1,17 +1,17 @@
 {
-    "required": true,
-    "minVersion": "0.8",
-    "package": "nnhomoli.bettertogether.mixins",
-    "compatibilityLevel": "JAVA_8",
-    "mixins": [
-    ],
-    "client": [
-    ],
-    "server": [
-      "playerMixin",
-      "entityMixin"
-    ],
-    "injectors": {
-        "defaultRequire": 1
+  "required": true,
+  "minVersion": "0.8",
+  "package": "nnhomoli.bettertogether.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "server": [
+    "entityMixin",
+    "playerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
   }
 }

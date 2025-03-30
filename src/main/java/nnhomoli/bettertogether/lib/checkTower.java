@@ -1,9 +1,9 @@
-package nnhomoli.bettertogether.misc;
+package nnhomoli.bettertogether.lib;
 
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.world.IVehicle;
 
-public class checkTower {
+public final class checkTower {
 	public static IVehicle getTowerRoot(IVehicle vehicle) {
 		if(vehicle instanceof Entity && ((Entity) vehicle).vehicle != null) {
 			return getTowerRoot(((Entity) vehicle).vehicle);
