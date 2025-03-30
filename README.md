@@ -2,7 +2,7 @@
 
 <img src="src/main/resources/icon.png" width="256" alt="">
 
-This mod adds server-sided sitting on players
+This mod adds server-sided riding on players for "[Better Than Adventure!](https://www.betterthanadventure.net/)" fork-mod
 
 ## Config
 
