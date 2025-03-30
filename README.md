@@ -1,6 +1,6 @@
 # Better Together
 
-<img src="src/main/resources/icon.png" width="256" alt="">
+<img src="gallery/icon_wide.png" width="960" height="540" alt="mod icon, but wider">
 
 This mod adds server-sided riding on players for "[Better Than Adventure!](https://www.betterthanadventure.net/)" fork-mod
 
@@ -19,5 +19,5 @@ True by default
 
 ## Gallery
 
-<img src="gallery/vehicle-perspective.png" width="512" alt=""> 
-<img src="gallery/passenger-perspective.png" width="512" alt="">
+<img src="gallery/vehicle-perspective.png" width="512" alt="vehicle perspective"> 
+<img src="gallery/passenger-perspective.png" width="512" alt="passenger perspective">
