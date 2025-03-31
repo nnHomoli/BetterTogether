@@ -16,6 +16,14 @@ vehicle-eject=true||false
 ```
 If the player attacks their own passenger, it will eject them.
 True by default
+```
+vehicle-limit=true||false
+```
+If true, the player with the passenger wouldn't be able to ride other entities that inherit vehicles, aka pig, minecart or boat.
+True by default
+
+This could cause minor desync sometimes.
+
 
 ## Gallery
 

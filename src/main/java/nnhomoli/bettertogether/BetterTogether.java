@@ -13,19 +13,23 @@ public final class BetterTogether implements ModInitializer {
 
 	private static boolean towering;
 	private static boolean vehicleEject;
+	private static boolean vehicleLimit;
 
 	public void setupConfig() {
 		Properties props = new Properties();
-		props.setProperty("vehicle-eject", "true");
 		props.setProperty("player-towering", "false");
+		props.setProperty("vehicle-eject", "true");
+		props.setProperty("vehicle-limit","true");
 		ConfigHandler cfg = new ConfigHandler(MOD_ID, props);
 
 		towering = cfg.getBoolean("player-towering");
 		vehicleEject = cfg.getBoolean("vehicle-eject");
+		vehicleLimit = cfg.getBoolean("vehicle-limit");
 	}
 
 	public static boolean getTowering() {return towering;}
 	public static boolean getVehicleEject() {return vehicleEject;}
+	public static boolean getVehicleLimit() {return vehicleLimit;}
 
 	@Override
 	public void onInitialize() {
