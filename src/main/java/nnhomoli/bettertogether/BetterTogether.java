@@ -12,28 +12,28 @@ public final class BetterTogether implements ModInitializer {
 	private final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	private static boolean towering;
+	private static boolean playerPickup;
 	private static boolean vehicleEject;
 	private static boolean vehicleLimit;
-	private static boolean playerPickup;
 
 	public void setupConfig() {
 		Properties props = new Properties();
 		props.setProperty("player-towering", "false");
+		props.setProperty("player-pickup","false");
 		props.setProperty("vehicle-eject", "true");
 		props.setProperty("vehicle-limit","true");
-		props.setProperty("player-pickup","false");
 		ConfigHandler cfg = new ConfigHandler(MOD_ID, props);
 
 		towering = cfg.getBoolean("player-towering");
+		playerPickup = cfg.getBoolean("player-pickup");
 		vehicleEject = cfg.getBoolean("vehicle-eject");
 		vehicleLimit = cfg.getBoolean("vehicle-limit");
-		playerPickup = cfg.getBoolean("player-pickup");
 	}
 
 	public static boolean getTowering() {return towering;}
+	public static boolean getPlayerPickup() {return playerPickup;}
 	public static boolean getVehicleEject() {return vehicleEject;}
 	public static boolean getVehicleLimit() {return vehicleLimit;}
-	public static boolean getPlayerPickup() {return playerPickup;}
 
 	@Override
 	public void onInitialize() {
