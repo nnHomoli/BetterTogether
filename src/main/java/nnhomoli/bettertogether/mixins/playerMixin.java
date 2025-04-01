@@ -1,5 +1,6 @@
 package nnhomoli.bettertogether.mixins;
 
+import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.net.packet.PacketAddPlayer;
@@ -24,14 +25,22 @@ abstract class playerMixin extends Entity {
 	public void Interact(Player p, CallbackInfoReturnable<Boolean> cir) {
 		Player player = (Player) (Object) this;
 
+		if(p.isSneaking()) {
+			if(getPlayerPickup()) {
+				Player og = p;
+				p = player;
+				player = og;
+			} else return;
+		}
+
 		IVehicle last = player.vehicle;
 		if(getTowering()) last = getTowerRoot(player);
 
 		if(last == null || getTowering()) {
-			if(getVehicleLimit() && !(last instanceof Player)) cir.cancel();
+			if(last != null && getVehicleLimit() && !(last instanceof Player)) return;
 
 			if (player.getPassenger() == null && p.getPassenger() == null) p.startRiding(player);
-			else if(getTowering() && !includedInTower(player,p)) p.startRiding(getTowerTop(player));
+			else if (getTowering() && !includedInTower(player, p)) p.startRiding(getTowerTop(player));
 
 			cir.setReturnValue(true);
 		}
@@ -63,12 +72,12 @@ abstract class playerMixin extends Entity {
 		if(player.vehicle instanceof Player) ci.cancel();
 	}
 
-	@Inject(method="useCurrentItemOnEntity",at= @At(value = "INVOKE", target = "Lnet/minecraft/core/entity/Entity;interact(Lnet/minecraft/core/entity/player/Player;)Z"), cancellable = true)
-	public void useCurrentItemOnEntity(Entity entity, CallbackInfoReturnable<Boolean> cir) {
+	@Override
+	public void startRiding(IVehicle e) {
 		Player p = (Player) (Object) this;
-		if(getVehicleLimit() && p.getPassenger() != null && IVehicle.class.isAssignableFrom(entity.getClass()) && !(entity instanceof Player)) {cir.setReturnValue(false);}
+		if(getVehicleLimit() && p.getPassenger() != null && !(e instanceof Player) && !(e instanceof TileEntity)) {return;}
+		super.startRiding(e);
 	}
-
 	@Override
 	public double getRideHeight(){
 		return (double)this.bbHeight * (double)1.25F;

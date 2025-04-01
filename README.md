@@ -12,6 +12,11 @@ player-towering=true||false
 If true, it will allow players to do towers.
 False by default
 ```
+player-pickup=true||false
+```
+If true, it allows the player to be picked up while sneaking.
+False by default
+```
 vehicle-eject=true||false
 ```
 If the player attacks their own passenger, it will eject them.
@@ -19,10 +24,8 @@ True by default
 ```
 vehicle-limit=true||false
 ```
-If true, the player with the passenger wouldn't be able to ride other entities that inherit vehicles, aka pig, minecart or boat.
+If true, the player with the passenger wouldn't be able to ride other entities, this does not affect tile entities, aka seat.
 True by default
-
-This could cause minor desync sometimes.
 
 
 ## Gallery
