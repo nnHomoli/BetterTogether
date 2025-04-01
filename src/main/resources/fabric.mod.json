@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Better Together",
-  "description": "Better Than Adventure mod that adds server-sided sitting on players",
+  "description": "mod for \"Better Than Adventure!\" that adds server-sided riding on players",
   "authors": [
     "nnHomoli"
   ],
