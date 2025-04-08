@@ -8,6 +8,7 @@ import net.minecraft.core.net.packet.PacketRemoveEntity;
 import net.minecraft.core.world.IVehicle;
 import net.minecraft.core.world.World;
 import net.minecraft.server.entity.player.PlayerServer;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -75,7 +76,7 @@ abstract class playerMixin extends Entity {
 	@Override
 	public void startRiding(IVehicle e) {
 		Player p = (Player) (Object) this;
-		if(getVehicleLimit() && p.getPassenger() != null && !(e instanceof Player) && !(e instanceof TileEntity)) {return;}
+		if(getVehicleLimit() && e != null && p.getPassenger() != null && !(e instanceof Player) && !(e instanceof TileEntity)) {return;}
 		super.startRiding(e);
 	}
 	@Override
