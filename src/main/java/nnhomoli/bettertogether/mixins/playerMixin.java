@@ -5,6 +5,7 @@ import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.net.packet.PacketAddPlayer;
 import net.minecraft.core.net.packet.PacketRemoveEntity;
+import net.minecraft.core.player.gamemode.Gamemode;
 import net.minecraft.core.world.IVehicle;
 import net.minecraft.core.world.World;
 import net.minecraft.server.entity.player.PlayerServer;
@@ -23,60 +24,49 @@ abstract class playerMixin extends Entity {
 	public playerMixin(World world) {super(world);}
 
 	@Inject(method="interact",at= @At(value = "HEAD"), cancellable = true)
-	public void Interact(Player p, CallbackInfoReturnable<Boolean> cir) {
+	public void interact(Player p, CallbackInfoReturnable<Boolean> cir) {
 		Player player = (Player) (Object) this;
 
 		if(p.isSneaking()) {
-			if(getPlayerPickup()) {
+			if(getPlayerPickup() && p.getGamemode() != Gamemode.adventure) {
 				Player og = p;
 				p = player;
 				player = og;
 			} else return;
 		}
 
-		IVehicle last = player.vehicle;
-		if(getTowering()) last = getTowerRoot(player);
+		IVehicle last = getTowerRoot(player);
+		if(getVehicleLimit() && !(last instanceof Player)&& !(last instanceof TileEntity)) return;
 
-		if(last == null || getTowering()) {
-			if(last != null && getVehicleLimit() && !(last instanceof Player)) return;
+		if (player.getPassenger() == null && p.getPassenger() == null && (player.vehicle == null||player.vehicle instanceof TileEntity)) p.startRiding(player);
+		else if (getTowering() && !includedInTower(player, p)) p.startRiding(getTowerTop(player));
 
-			if (player.getPassenger() == null && p.getPassenger() == null) p.startRiding(player);
-			else if (getTowering() && !includedInTower(player, p)) p.startRiding(getTowerTop(player));
-
-			cir.setReturnValue(true);
-		}
+		if(p.vehicle == player) cir.setReturnValue(true);
 	}
 	@Inject(method = "onDeath",at=@At("HEAD"))
 	public void onDeath(Entity entityKilledBy, CallbackInfo ci) {
-		Player player = (Player) (Object) this;
-		if(player.getPassenger() != null) {
-			player.ejectRider();
-		}
+		if(this.getPassenger() != null) this.ejectRider();
 	}
 	@Inject(method= "attackTargetEntityWithCurrentItem",at= @At(value = "HEAD"), cancellable = true)
 	public void attackTargetEntityWithCurrentItem(Entity entity, CallbackInfo ci) {
-		Player player = (Player) (Object) this;
-		if(entity.vehicle == player && player.getPassenger() instanceof Player) {
- 			if(getVehicleEject()) {
-				player.ejectRider();
+		if(entity instanceof  Player) {
+			if(includedInTower(this, entity)) ci.cancel();
+			if (entity.vehicle == this && getVehicleEject()) {
+				this.ejectRider();
 
 				PlayerServer ent = (PlayerServer) entity;
-				ent.playerNetServerHandler.sendPacket(new PacketRemoveEntity(player.id));
-				ent.playerNetServerHandler.sendPacket(new PacketAddPlayer(player));
+				ent.playerNetServerHandler.sendPacket(new PacketRemoveEntity(this.id));
+				ent.playerNetServerHandler.sendPacket(new PacketAddPlayer((Player)(Object)this));
 			}
-			ci.cancel();
-		} else if(entity instanceof Player && includedInTower(player,entity)) ci.cancel();
+		}
 	}
 	@Inject(method="causeFallDamage",at=@At("HEAD"), cancellable = true)
 	protected void causeFallDamage(float distance, CallbackInfo ci) {
-		Player player = (Player) (Object) this;
-		if(player.vehicle instanceof Player) ci.cancel();
+		if(this.vehicle instanceof Player) ci.cancel();
 	}
-
 	@Override
 	public void startRiding(IVehicle e) {
-		Player p = (Player) (Object) this;
-		if(getVehicleLimit() && e != null && p.getPassenger() != null && !(e instanceof Player) && !(e instanceof TileEntity)) {return;}
+		if(getVehicleLimit() && e != null && this.getPassenger() != null && !(e instanceof Player) && !(e instanceof TileEntity)) {return;}
 		super.startRiding(e);
 	}
 	@Override
