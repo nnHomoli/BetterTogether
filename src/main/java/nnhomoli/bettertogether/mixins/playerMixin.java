@@ -54,9 +54,11 @@ abstract class playerMixin extends Entity {
 			if (entity.vehicle == this && getVehicleEject()) {
 				this.ejectRider();
 
-				PlayerServer ent = (PlayerServer) entity;
-				ent.playerNetServerHandler.sendPacket(new PacketRemoveEntity(this.id));
-				ent.playerNetServerHandler.sendPacket(new PacketAddPlayer((Player)(Object)this));
+				if(!isSyncMyRideLoaded) {
+					PlayerServer ent = (PlayerServer) entity;
+					ent.playerNetServerHandler.sendPacket(new PacketRemoveEntity(this.id));
+					ent.playerNetServerHandler.sendPacket(new PacketAddPlayer((Player) (Object) this));
+				}
 			}
 		}
 	}

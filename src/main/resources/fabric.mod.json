@@ -9,6 +9,7 @@
     "nnHomoli"
   ],
   "contact": {
+		"homepage": "https://modrinth.com/mod/bettertogether",
     "sources": "https://github.com/nnHomoli/BetterTogether"
   },
 
@@ -31,5 +32,6 @@
 		"halplibe": ">=5.2.1"
   },
   "suggests": {
+		"syncmyride": "*"
   }
 }

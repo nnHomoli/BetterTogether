@@ -3,6 +3,7 @@ package nnhomoli.bettertogether;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.api.ModInitializer;
 import turniplabs.halplibe.util.ConfigHandler;
 
@@ -36,9 +37,13 @@ public final class BetterTogether implements ModInitializer {
 	public static boolean getVehicleEject() {return vehicleEject;}
 	public static boolean getVehicleLimit() {return vehicleLimit;}
 
+	public static final boolean isSyncMyRideLoaded = FabricLoader.getInstance().isModLoaded("syncmyride");
+
 	@Override
 	public void onInitialize() {
 		setupConfig();
+
+		if(isSyncMyRideLoaded) LOGGER.info("SyncMyRide is loaded, disabling player refresh");
 		LOGGER.info("Better Together initialized.");
 	}
 }
