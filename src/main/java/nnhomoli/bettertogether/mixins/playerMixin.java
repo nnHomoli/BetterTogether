@@ -2,6 +2,7 @@ package nnhomoli.bettertogether.mixins;
 
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.Entity;
+import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.net.packet.PacketAddPlayer;
 import net.minecraft.core.net.packet.PacketRemoveEntity;
@@ -20,7 +21,7 @@ import static nnhomoli.bettertogether.lib.checkTower.*;
 import static nnhomoli.bettertogether.BetterTogether.*;
 
 @Mixin(value = Player.class,remap=false)
-abstract class playerMixin extends Entity {
+abstract class playerMixin extends Mob {
 	public playerMixin(World world) {super(world);}
 
 	@Inject(method="interact",at= @At(value = "HEAD"), cancellable = true)
@@ -38,7 +39,7 @@ abstract class playerMixin extends Entity {
 		IVehicle last = getTowerRoot(player);
 		if(getVehicleLimit() && !(last instanceof Player)&& !(last instanceof TileEntity)) return;
 
-		if (player.getPassenger() == null && p.getPassenger() == null && (player.vehicle == null||player.vehicle instanceof TileEntity)) p.startRiding(player);
+		if (player.getPassenger() == null && p.getPassenger() == null && (!getVehicleLimit()||player.vehicle == null||player.vehicle instanceof TileEntity)) p.startRiding(player);
 		else if (getTowering() && !includedInTower(player, p)) p.startRiding(getTowerTop(player));
 
 		if(p.vehicle == player) cir.setReturnValue(true);
