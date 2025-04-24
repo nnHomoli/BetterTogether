@@ -65,7 +65,7 @@ abstract class playerMixin extends Mob {
 	}
 	@Inject(method="causeFallDamage",at=@At("HEAD"), cancellable = true)
 	protected void causeFallDamage(float distance, CallbackInfo ci) {
-		if(this.vehicle instanceof Player) ci.cancel();
+		if(getFallDamageDisabled() && this.vehicle instanceof Player) ci.cancel();
 	}
 	@Override
 	public void startRiding(IVehicle e) {

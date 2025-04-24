@@ -26,7 +26,13 @@ vehicle-limit=true||false
 ```
 If true, the player with the passenger wouldn't be able to ride other entities, this does not affect tile entities, aka seat.
 True by default
+```
+fall-damage-disabled=true||false
+```
+Normally in BTA, when a vehicle receives fall damage, this damage is also replicated to the passenger.
 
+This option will disable that feature, but for the players only.
+True by default;
 
 ## Gallery
 

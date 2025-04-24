@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.api.ModInitializer;
+
 import turniplabs.halplibe.util.ConfigHandler;
 
 import java.util.Properties;
@@ -17,6 +18,7 @@ public final class BetterTogether implements ModInitializer {
 	private static boolean playerPickup;
 	private static boolean vehicleEject;
 	private static boolean vehicleLimit;
+	private static boolean fallDamageDisabled;
 
 	public void setupConfig() {
 		Properties props = new Properties();
@@ -24,18 +26,21 @@ public final class BetterTogether implements ModInitializer {
 		props.setProperty("player-pickup","false");
 		props.setProperty("vehicle-eject", "true");
 		props.setProperty("vehicle-limit","true");
+		props.setProperty("fall-damage-disabled","true");
 		ConfigHandler cfg = new ConfigHandler(MOD_ID, props);
 
 		towering = cfg.getBoolean("player-towering");
 		playerPickup = cfg.getBoolean("player-pickup");
 		vehicleEject = cfg.getBoolean("vehicle-eject");
 		vehicleLimit = cfg.getBoolean("vehicle-limit");
+		fallDamageDisabled = cfg.getBoolean("fall-damage-disabled");
 	}
 
 	public static boolean getTowering() {return towering;}
 	public static boolean getPlayerPickup() {return playerPickup;}
 	public static boolean getVehicleEject() {return vehicleEject;}
 	public static boolean getVehicleLimit() {return vehicleLimit;}
+	public static boolean getFallDamageDisabled() {return fallDamageDisabled;}
 
 	public static final boolean isSyncMyRideLoaded = FabricLoader.getInstance().isModLoaded("syncmyride");
 
@@ -43,7 +48,7 @@ public final class BetterTogether implements ModInitializer {
 	public void onInitialize() {
 		setupConfig();
 
-		if(isSyncMyRideLoaded) LOGGER.info("SyncMyRide is loaded, disabling player refresh");
+		if(isSyncMyRideLoaded) LOGGER.info("SyncMyRide is loaded, player refresh is disabled");
 		LOGGER.info("Better Together initialized.");
 	}
 }
