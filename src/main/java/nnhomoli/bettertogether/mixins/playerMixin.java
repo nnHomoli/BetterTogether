@@ -46,7 +46,7 @@ abstract class playerMixin extends Mob {
 	}
 	@Inject(method = "onDeath",at=@At("HEAD"))
 	public void onDeath(Entity entityKilledBy, CallbackInfo ci) {
-		this.ejectRider();
+		if(!isSyncMyRideLoaded)this.ejectRider();
 	}
 	@Inject(method= "attackTargetEntityWithCurrentItem",at= @At(value = "HEAD"), cancellable = true)
 	public void attackTargetEntityWithCurrentItem(Entity entity, CallbackInfo ci) {
